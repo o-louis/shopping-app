@@ -1,28 +1,48 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Navbar />
+    <b-container>
+      <b-row>
+        <CartList />
+        <b-col>
+          <div class="jumbotron">
+              <h1>Basket</h1>
+              <p class="lead">Your purchase</p>
+              <hr class="my-4">
+              <p>Total: ${{ total.price }}</p>
+              <ul >
+                <li v-for="product in shoppingList" :key="product.id">
+                  <h3>{{ product.name }}</h3>
+                  <p>${{ product.price }}<span> x{{quantity[product.id]}}</span></p>
+                  <button @click="removeToTotal(product)">-</button>
+                </li>
+              </ul>
+              <a class="btn btn-warning btn-lg text-white w-100" href="#" role="button">Buy</a>
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Navbar from '@/layouts/Navbar'
+import CartList from '@/components/CartList'
+
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Navbar,
+    CartList
+  },
+  computed: mapGetters(['total', 'shoppingList', 'quantity']),
+  methods: {
+    removeToTotal (product) {
+      this.$store.commit('removeToTotal', product)
+    }
   }
+
 }
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

@@ -1,0 +1,10 @@
+@mixin btn {
+    background-color: rgb(75, 75, 255);
+    color: white;
+}
+
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
