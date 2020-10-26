@@ -1,1 +1,1 @@
-# Shopping app 🛍👜s
+# Shopping app 🛍👜
